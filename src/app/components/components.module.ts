@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HearderComponent } from './hearder/hearder.component';
+import { HeaderComponent } from './header/header.component';
 import { IonicModule } from '@ionic/angular';
 
 
 
 @NgModule({
   declarations: [
-    HearderComponent
+    HeaderComponent
   ],
-  exports:[
-    HearderComponent
+  exports: [
+    HeaderComponent
   ],
   imports: [
     CommonModule,

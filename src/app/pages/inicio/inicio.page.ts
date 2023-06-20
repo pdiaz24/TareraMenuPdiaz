@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { MenuController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { ComponentsModule } from '../../components/components.module';
+import { DataService } from '../../services/data.service';
 
-interface componente {
-icon:string;
-name: string;
-redirectTo: string;
+//crear una interface para definir propiedades que el componente lista va a tener
+interface Componente {
+  icon: string;
+  name: string;
+  redirectTo: string;
 }
 
 @Component({
@@ -12,26 +16,19 @@ redirectTo: string;
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
 })
-export class InicioPage implements OnInit {
 
-  //crear nuevo listado
-//componentes: any[] = [];
-componentes: componente [] = [
-  {
-  icon: 'american-football-outline',
-  name: 'Accion',
-  redirectTo: '/accion'
-  },
-  {
-  icon: 'logo-apple-appstore',
-  name: 'Alerta',
-  redirectTo: '/alert'
-  },
-  ];
+export class InicioPage implements OnInit {
   
-  constructor() { }
+  componentes: Observable<Componente[]> = new Observable<Componente[]>(); // Corrección aquí
+
+  constructor(
+    private menuCtrl: MenuController,
+    private dataService: DataService) { }
 
   ngOnInit() {
+    this.componentes = this.dataService.getMenuOpts();
   }
-
+  mostrarMenu() {
+    this.menuCtrl.open('first');
+  }
 }
